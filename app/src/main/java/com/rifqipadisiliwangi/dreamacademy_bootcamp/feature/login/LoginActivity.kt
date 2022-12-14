@@ -1,6 +1,9 @@
 package com.rifqipadisiliwangi.dreamacademy_bootcamp.feature.login
 
+import android.annotation.SuppressLint
 import android.content.DialogInterface
+import android.content.Intent
+import android.opengl.Visibility
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
@@ -9,6 +12,8 @@ import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
 import androidx.core.widget.doOnTextChanged
 import com.rifqipadisiliwangi.dreamacademy_bootcamp.databinding.ActivityLoginBinding
+import com.rifqipadisiliwangi.dreamacademy_bootcamp.feature.home.MainActivity
+import com.rifqipadisiliwangi.dreamacademy_bootcamp.feature.register.RegisterActivity
 
 class LoginActivity : AppCompatActivity(), LoginContract {
 
@@ -23,11 +28,7 @@ class LoginActivity : AppCompatActivity(), LoginContract {
         _presenter.onAttach(this)
 
         binding.btnLogin.setOnClickListener {
-            _presenter.validateCredential(
-                binding.etUsername.text.toString(),
-                binding.etPassword.text.toString()
-
-            )
+            onSuccessLogin()
         }
 
         binding.etUsername.doOnTextChanged { text, start, before, count ->
@@ -35,6 +36,9 @@ class LoginActivity : AppCompatActivity(), LoginContract {
         }
         binding.etPassword.doOnTextChanged { text, start, before, count ->
             validateInput()
+        }
+        binding.btnRegister.setOnClickListener {
+            startActivity(Intent(this, RegisterActivity::class.java))
         }
 
     }
@@ -53,24 +57,33 @@ class LoginActivity : AppCompatActivity(), LoginContract {
         binding.progressIndicator.isVisible = false
     }
 
-    override fun onError(message: String) {
-        AlertDialog.Builder(this)
-            .setMessage(message)
-            .setPositiveButton("Ok", this::dialogClickListener)
-            .setNegativeButton("Cancel", this::dialogClickListener)
-            .create()
-            .show()
+    @SuppressLint("SetTextI18n")
+    override fun onError(code:Int,message: String) {
+//        AlertDialog.Builder(this)
+//            .setMessage(message)
+//            .setPositiveButton("Ok", this::dialogClickListener)
+//            .setNegativeButton("Cancel", this::dialogClickListener)
+//            .create()
+//            .show()
+        when(code){
+            0 -> binding.tvCheckValidate.text = message
+            1 -> binding.tvCheckValidate.text = message
+            2 -> binding.tvCheckValidate.text = message
+        }
+
     }
 
-    private fun dialogClickListener(dialogInterface: DialogInterface, button: Int) {
-        when (button) {
-            DialogInterface.BUTTON_NEGATIVE -> {}
-            DialogInterface.BUTTON_POSITIVE -> {}
-            DialogInterface.BUTTON_NEUTRAL -> {}
-        }
-    }
+//    private fun dialogClickListener(dialogInterface: DialogInterface, button: Int) {
+//        when (button) {
+//            DialogInterface.BUTTON_NEGATIVE -> {}
+//            DialogInterface.BUTTON_POSITIVE -> {}
+//            DialogInterface.BUTTON_NEUTRAL -> {}
+//        }
+//    }
 
     override fun onSuccessLogin() {
+        binding.tvCheckValidate.visibility = this.hashCode()
+        startActivity(Intent(this, MainActivity::class.java))
         Toast.makeText(this, "Success Login", Toast.LENGTH_SHORT).show()
     }
 

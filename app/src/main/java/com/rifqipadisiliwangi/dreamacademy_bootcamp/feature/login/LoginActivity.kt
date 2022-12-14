@@ -22,6 +22,7 @@ import com.rifqipadisiliwangi.dreamacademy_bootcamp.feature.reqrest.ReqrestActiv
 class LoginActivity : AppCompatActivity(), LoginView {
     private lateinit var binding: ActivityLoginBinding
     private val presenter = LoginPresenter(CredentialApi(), UserApi())
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
@@ -43,6 +44,9 @@ class LoginActivity : AppCompatActivity(), LoginView {
         binding.edtPassword.doOnTextChanged { text, start, before, count ->
             validateInput()
         }
+        binding.tvRegister.setOnClickListener {
+            startActivity(Intent(this, RegisterActivity::class.java))
+        }
     }
 
     private fun validateInput() {
@@ -56,7 +60,6 @@ class LoginActivity : AppCompatActivity(), LoginView {
     }
 
     override fun onFinishedLoading() {
-        startActivity(Intent(this, ReqrestActivity::class.java))
         binding.progressIndicator.isVisible = false
     }
 
@@ -105,6 +108,8 @@ class LoginActivity : AppCompatActivity(), LoginView {
     }
 
     override fun onSuccessLogin(username: String, password: String) {
+        startActivity(Intent(this, ReqrestActivity::class.java))
+        finish()
         Toast.makeText(this, "Success Login", Toast.LENGTH_SHORT).show()
         presenter.register(username, password)
         presenter.getUser()

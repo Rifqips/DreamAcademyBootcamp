@@ -14,6 +14,7 @@ import androidx.core.widget.doOnTextChanged
 import com.rifqipadisiliwangi.dreamacademy_bootcamp.databinding.ActivityLoginBinding
 import com.rifqipadisiliwangi.dreamacademy_bootcamp.feature.home.MainActivity
 import com.rifqipadisiliwangi.dreamacademy_bootcamp.feature.register.RegisterActivity
+import com.rifqipadisiliwangi.dreamacademy_bootcamp.feature.reqrest.ReqrestActivity
 
 class LoginActivity : AppCompatActivity(), LoginContract {
 
@@ -83,7 +84,7 @@ class LoginActivity : AppCompatActivity(), LoginContract {
 
     override fun onSuccessLogin() {
         binding.tvCheckValidate.visibility = this.hashCode()
-        startActivity(Intent(this, MainActivity::class.java))
+        startActivity(Intent(this, ReqrestActivity::class.java))
         Toast.makeText(this, "Success Login", Toast.LENGTH_SHORT).show()
     }
 

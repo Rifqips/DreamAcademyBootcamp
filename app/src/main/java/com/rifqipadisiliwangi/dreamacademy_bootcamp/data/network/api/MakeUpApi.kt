@@ -1,8 +1,8 @@
 package com.rifqipadisiliwangi.dreamacademy_bootcamp.data.network.api
 
 import com.rifqipadisiliwangi.dreamacademy_bootcamp.data.model.MakeUpItem
-import com.rifqipadisiliwangi.dreamacademy_bootcamp.data.model.deserializeJson
 import com.rifqipadisiliwangi.dreamacademy_bootcamp.data.network.ResponseStatus
+import com.rifqipadisiliwangi.dreamacademy_bootcamp.data.network.deserializeJson
 import okhttp3.Call
 import okhttp3.Callback
 import okhttp3.Request

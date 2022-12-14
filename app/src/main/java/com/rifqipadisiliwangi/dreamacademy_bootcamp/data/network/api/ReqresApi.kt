@@ -29,7 +29,7 @@ class ReqresApi {
                     if (response.isSuccessful){
                         val body = JSONObject(response.body?.string()?: "")
                         onResponse.invoke(
-                            ResponseStatus.Success(User(body))
+                            ResponseStatus.Success(User(avatar = "", id = 0, email = "", lastName = "", firstName = ""))
                         )
                     } else {
                         onResponse.invoke(
@@ -132,16 +132,6 @@ class ReqresApi {
                     response.body?.close()
                 }
             })
-    }
-
-    private fun mapUsers(jsonObject: JSONObject): List<User> {
-        val usersArray = jsonObject.getJSONArray("data")
-        val resultData = mutableListOf<User>()
-        for (i in 0 until usersArray.length()) {
-            val obj = usersArray.getJSONObject(i)
-            resultData.add(User(obj))
-        }
-        return resultData
     }
 
 }

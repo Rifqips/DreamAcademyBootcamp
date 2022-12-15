@@ -23,14 +23,11 @@ class RegisterActivity : AppCompatActivity(), LoginView {
 
     private lateinit var binding : ActivityRegisterBinding
     private val presenter = LoginPresenter(CredentialApi(), UserApi())
-//    private val _presenter = LoginPresenter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        presenter.onAttach(this)
-
         binding.btnRegister.setOnClickListener {
             presenter.validateCredential(
                 binding.etUsername.text.toString(),
@@ -38,36 +35,22 @@ class RegisterActivity : AppCompatActivity(), LoginView {
             )
         }
 
-        binding.etUsername.doOnTextChanged { text, start, before, count ->
+        binding.ivBackDetail.setOnClickListener {
+            startActivity(Intent(this, LoginActivity::class.java))
+        }
+        presenter.onAttach(this)
+
+        binding.etPassword.addTextChangedListener {
             validateInput()
         }
 
-        binding.etPassword.doOnTextChanged { text, start, before, count ->
+        binding.etConfPassword.addTextChangedListener {
             validateInput()
         }
 
-//        _presenter.onAttach(this)
-//
-//        binding.btnRegister.setOnClickListener {
-//            _presenter.validateCredential(
-//                binding.etUsername.text.toString(),
-//                binding.etPassword.text.toString()
-//            )
-//        }
-//
-//        binding.ivBackDetail.setOnClickListener {
-//            startActivity(Intent(this, LoginActivity::class.java))
-//        }
-//
-//        binding.etPassword.addTextChangedListener {
-//            validateInput()
-//        }
-//        binding.etConfPassword.addTextChangedListener {
-//            validateInput()
-//        }
-//        binding.etUsername.addTextChangedListener {
-//            validateInput()
-//        }
+        binding.etUsername.addTextChangedListener {
+            validateInput()
+        }
 
     }
 
@@ -82,7 +65,6 @@ class RegisterActivity : AppCompatActivity(), LoginView {
     }
 
     override fun onFinishedLoading() {
-        startActivity(Intent(this, LoginActivity::class.java))
         binding.progressIndicator.isVisible = false
     }
 
@@ -131,6 +113,7 @@ class RegisterActivity : AppCompatActivity(), LoginView {
     }
 
     override fun onSuccessLogin(username: String, password: String) {
+        // startActivity(Intent(this, LoginActivity::class.java))
         Toast.makeText(this, "Success Login", Toast.LENGTH_SHORT).show()
         presenter.register(username, password)
         presenter.getUser()

@@ -35,33 +35,6 @@ class LoginPresenter(
         this.view = null
     }
 
-//    fun validateCredential(userName: String, password: String) {
-//        view?.onLoading()
-//        val isPasswordValid = password.contains("[a-z]".toRegex())
-//                && password.contains("[A-Z]".toRegex())
-//                && password.contains("[0-9]".toRegex())
-//                && password.length >= 8
-//
-//        val isUsernameValid = userName.length > 5
-//        view?.onErrorPassword(false, "")
-//
-//        if (isPasswordValid && isUsernameValid) {
-//            view?.onSuccessLogin(userName, password)
-//        } else if (!isUsernameValid) {
-//            view?.onError(USERNAME_ERROR, "invalid username")
-//        } else {
-//            if (!password.contains("[a-z]".toRegex())) {
-//                view?.onErrorPassword(true, "password tidak mengandung lowercase")
-//            } else if (!password.contains("[0-9]".toRegex())) {
-//                view?.onErrorPassword(false, "password tidak mengandung angka")
-//            } else {
-//                view?.onError(PASSWORD_ERROR, "invalid password")
-//            }
-//        }
-//
-//        view?.onFinishedLoading()
-//    }
-
     fun validateCredential(userName: String, password: String) {
         view?.onLoading()
         val isPasswordValid =

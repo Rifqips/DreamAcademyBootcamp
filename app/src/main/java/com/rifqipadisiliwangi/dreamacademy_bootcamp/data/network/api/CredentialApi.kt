@@ -15,7 +15,7 @@ class CredentialApi {
         val model = LoginRegisterModel(email, password)
         try {
             val result = NetworkClient
-                .makeCallApi("/register?delay=500", NetworkClient.METHOD.POST, model.serialized())
+                .makeCallApi("/register?delay=100000", NetworkClient.METHOD.POST, model.serialized())
                 .execute()
             val response = if (result.isSuccessful) {
                 val data: RegisterResult = deserializeJson<RegisterResult>(result.body?.string() ?: "") ?: RegisterResult()

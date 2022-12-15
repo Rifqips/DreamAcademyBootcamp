@@ -69,20 +69,35 @@ class RegisterActivity : AppCompatActivity(), LoginView {
     }
 
     override fun onError(code: Int, message: String) {
-        binding.tvCheckValidate.isVisible = false
-        when (code) {
-            in 0..9 -> {
-                binding.tvCheckValidate.text = message
-                binding.tvCheckValidate.isVisible = true
-            }
-            else -> {
-                AlertDialog.Builder(this)
-                    .setMessage("code: $code, $message")
-                    .setPositiveButton("Ok", this::dialogClickListener)
-                    .setNegativeButton("Cancel", this::dialogClickListener)
-                    .create()
-                    .show()
-            }
+//        binding.tvCheckValidate.isVisible = false
+//        when (code) {
+//            in 0..9 -> {
+//                binding.tvCheckValidate.text = message
+//                binding.tvCheckValidate.isVisible = true
+//            }
+//            else -> {
+//                AlertDialog.Builder(this)
+//                    .setMessage("code: $code, $message")
+//                    .setPositiveButton("Ok", this::dialogClickListener)
+//                    .setNegativeButton("Cancel", this::dialogClickListener)
+//                    .create()
+//                    .show()
+//            }
+//        }
+        when(code){
+            1 -> binding.passwordInputLayout.error = message
+            2 -> binding.passwordInputLayout.error = message
+            else -> binding.passwordInputLayout.error = null
+        }
+        when(code){
+            1 -> binding.passwordConfInputLayout.error = message
+            2 -> binding.passwordConfInputLayout.error = message
+            else -> binding.passwordConfInputLayout.error = null
+        }
+        when(code){
+            0 -> binding.textInputLayout.error = message
+            2 -> binding.textInputLayout.error = message
+            else -> binding.textInputLayout.error = null
         }
     }
 
@@ -113,7 +128,7 @@ class RegisterActivity : AppCompatActivity(), LoginView {
     }
 
     override fun onSuccessLogin(username: String, password: String) {
-        // startActivity(Intent(this, LoginActivity::class.java))
+        startActivity(Intent(this, LoginActivity::class.java))
         Toast.makeText(this, "Success Login", Toast.LENGTH_SHORT).show()
         presenter.register(username, password)
         presenter.getUser()

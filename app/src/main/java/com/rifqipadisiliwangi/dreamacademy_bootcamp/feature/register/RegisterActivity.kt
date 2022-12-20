@@ -8,16 +8,13 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
-import androidx.core.widget.doOnTextChanged
 import com.rifqipadisiliwangi.dreamacademy_bootcamp.data.model.UserPagination
 import com.rifqipadisiliwangi.dreamacademy_bootcamp.data.network.api.CredentialApi
 import com.rifqipadisiliwangi.dreamacademy_bootcamp.data.network.api.UserApi
 import com.rifqipadisiliwangi.dreamacademy_bootcamp.databinding.ActivityRegisterBinding
 import com.rifqipadisiliwangi.dreamacademy_bootcamp.feature.login.LoginActivity
-import com.rifqipadisiliwangi.dreamacademy_bootcamp.feature.login.LoginContract
 import com.rifqipadisiliwangi.dreamacademy_bootcamp.feature.login.LoginPresenter
 import com.rifqipadisiliwangi.dreamacademy_bootcamp.feature.login.LoginView
-import com.rifqipadisiliwangi.dreamacademy_bootcamp.feature.reqrest.ReqrestActivity
 
 class RegisterActivity : AppCompatActivity(), LoginView {
 
